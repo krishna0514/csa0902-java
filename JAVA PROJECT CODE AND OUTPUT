@@ -1,0 +1,84 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        Room currentRoom = createRooms(); // Initialize the starting room
+
+        System.out.println("Welcome to the Text Adventure Game!");
+        System.out.println("You are in " + currentRoom.getName());
+
+        while (true) {
+            System.out.println("What do you want to do? (Type 'quit' to exit)");
+            System.out.print("> ");
+            input = scanner.nextLine().toLowerCase();
+
+            if (input.equals("quit")) {
+                System.out.println("Thanks for playing!");
+                break;
+            }
+
+            currentRoom = processCommand(input, currentRoom);
+            System.out.println("You are in " + currentRoom.getName());
+        }
+
+        scanner.close();
+    }
+
+    static class Room {
+        private String name;
+        private String description;
+        private Room north;
+        private Room south;
+        private Room east;
+        private Room west;
+
+        public Room(String name, String description) {
+            this.name = name;
+            this.description = description;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setExits(Room north, Room south, Room east, Room west) {
+            this.north = north;
+            this.south = south;
+            this.east = east;
+            this.west = west;
+        }
+
+        public Room getNorth() {
+            return north;
+        }
+
+        public Room getSouth() {
+            return south;
+        }
+
+
+OUT PUT
+
+Welcome to the Text Adventure Game!
+You are in Start Room
+What do you want to do? (Type 'quit' to exit)
+> You are in North Room
+What do you want to do? (Type 'quit' to exit)
+> You cannot go east from here.
+You are in North Room
+What do you want to do? (Type 'quit' to exit)
+> You are in Start Room
+What do you want to do? (Type 'quit' to exit)
+> Invalid command. Try 'go north', 'go south', 'go east', 'go west', or 'quit'.
+You are in Start Room
+What do you want to do? (Type 'quit' to exit)
+> Thanks for playing!
+
+[Execution complete with exit code 0]
